@@ -1,0 +1,20 @@
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+
+type Query {
+    getContracts(limit: Int): [Contract]!
+}
+
+type Contract @key(fields: "id") {
+    id: ID!
+    title: String!
+    supplier: Supplier!
+    responsibles: [User!]
+}
+
+type Supplier @key(fields: "id") {
+    id: ID!
+    contracts: [Contract!]
+}
+type User @key(fields: "id", resolvable: false) {
+    id: ID!
+}
